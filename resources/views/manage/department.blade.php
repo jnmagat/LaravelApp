@@ -10,34 +10,36 @@
         </button>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-hover table-bordered shadow-sm align-middle">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody id="departmentTableBody">
-                @foreach($departments as $department)
-                <tr id="row-{{ $department->id }}">
-                    <td>{{ $department->id }}</td>
-                    <td class="dept-name">{{ $department->name }}</td>
-                    <td>
-                        <button class="btn btn-warning btn-sm edit-btn" data-id="{{ $department->id }}" data-name="{{ $department->name }}">
-                            <i class="bi bi-pencil-square"></i> Edit
-                        </button>
-                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $department->id }}">
-                            <i class="bi bi-trash"></i> Delete
-                        </button>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-            
-        </table>
-    </div>
+     <div id="departmentContainer">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered shadow-sm align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="departmentTableBody">
+                    @foreach($departments as $department)
+                    <tr id="row-{{ $department->id }}">
+                        <td>{{ $department->id }}</td>
+                        <td class="dept-name">{{ $department->name }}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm edit-btn" data-id="{{ $department->id }}" data-name="{{ $department->name }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $department->id }}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        
+    
     {{-- Create or Edit Modal --}}
 <div class="modal fade" id="departmentModal" tabindex="-1" aria-labelledby="departmentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

@@ -24,6 +24,7 @@ $(document).ready(function () {
         $("#employee_name").val(employeeName);
         $("#employee_email").val(employeeEmail);
         $("#department_id").val(departmentId);
+        $("#department_id").val(departmentId).trigger("change");
 
         $("#employeeModalLabel").text("Edit Employee"); // Change modal title
         $("#employeeError").addClass("d-none").html(""); // Hide error message
@@ -55,12 +56,14 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     $("#employeeError").addClass("d-none").html(""); // Hide error message
-
+            
                     if (employeeId) {
-                        // Update existing row
+                        // Update existing row with new values
                         $(`#row-${employeeId} .emp-name`).text(employeeName);
                         $(`#row-${employeeId} .emp-email`).text(employeeEmail);
-                        $(`#row-${employeeId} .emp-dept`).text(response.department_name);
+                        $(`#row-${employeeId} .emp-dept`).text(response.department_name); 
+            
+                        // Update edit button attributes
                         $(`#row-${employeeId} .edit-btn`).data("name", employeeName);
                         $(`#row-${employeeId} .edit-btn`).data("email", employeeEmail);
                         $(`#row-${employeeId} .edit-btn`).data("department-id", departmentId);
@@ -71,23 +74,25 @@ $(document).ready(function () {
                                 <td>${response.employee.id}</td>
                                 <td class="emp-name">${response.employee.name}</td>
                                 <td class="emp-email">${response.employee.email}</td>
-                                <td class="emp-dept">${response.department_name}</td>
-                                <td>
+                                <td class="emp-dept">${response.department_name}</td> 
+                                <td class="text-center">
                                     <button class="btn btn-warning btn-sm edit-btn" 
                                         data-id="${response.employee.id}" 
                                         data-name="${response.employee.name}" 
                                         data-email="${response.employee.email}" 
                                         data-department-id="${response.employee.department_id}">
-                                        <i class="bi bi-pencil-square"></i> Edit
+                                        <i class="bi bi-pencil-square"></i>
                                     </button>
                                     <button class="btn btn-danger btn-sm delete-btn" data-id="${response.employee.id}">
-                                        <i class="bi bi-trash"></i> Delete
+                                        <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
                             </tr>
                         `);
                     }
-                    $("#employeeModal").modal("hide"); // Hide modal
+            
+                    $("#employeeModal").modal("hide");
+                    showToast(response.message, "success");
                 } else {
                     $("#employeeError").removeClass("d-none").html(response.error); // Show error
                 }
@@ -125,6 +130,7 @@ $(document).ready(function () {
                     } else {
                         alert("Failed to delete employee.");
                     }
+                    showToast(response.message, "success");
                 },
                 error: function (xhr) {
                     console.error("Error:", xhr.responseText);

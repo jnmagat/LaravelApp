@@ -4,40 +4,41 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="text-primary fw-bold m-0 text-success">Manage Employees</h2>
-        <!-- Modal Btn -->
+        {{-- Modal Btn  --}}
         <button type="button" id="addEmployeeBtn" class="btn btn-success">
             Add Employee
         </button>
     </div>
 
     <div class="table-responsive">
-        <table class="table table-hover table-bordered shadow-sm align-middle">
+        <table class="table table-hover table-bordered shadow-sm align-middle small">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Department</th>
-                    <th class="text-center">Action</th>
+                    <th class="p-1">ID</th>
+                    <th class="p-1">Name</th>
+                    <th class="p-1">Email</th>
+                    <th class="p-1">Department</th>
+                    <th class="p-1 text-center">Action</th>
                 </tr>
             </thead>
             <tbody id="employeeTableBody">
                 @foreach($employees as $employee)
                 <tr id="row-{{ $employee->id }}">
-                    <td>{{ $employee->id }}</td>
-                    <td class="emp-name">{{ $employee->name }}</td>
-                    <td class="emp-email">{{ $employee->email }}</td>
-                    <td class="emp-dept">{{ $employee->department_name }}</td>
-                    <td>
+                    <td class="p-1">{{ $employee->id }}</td>
+                    <td class="p-1 text-truncate emp-name">{{ $employee->name }}</td>
+                    <td class="p-1 text-truncate emp-email">{{ $employee->email }}</td>
+                    <td class="p-1 text-truncate emp-dept">{{ $employee->department_name }}</td>
+                    <td class="p-1 text-center">
                         <button class="btn btn-warning btn-sm edit-btn" 
                             data-id="{{ $employee->id }}" 
                             data-name="{{ $employee->name }}" 
                             data-email="{{ $employee->email }}" 
-                            data-department-id="{{ $employee->department_id }}">
-                            <i class="bi bi-pencil-square"></i> Edit
+                            data-department-id="{{ $employee->department_id }}" 
+                            data-department-name="{{ $employee->department_name }}">
+                            <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $employee->id }}">
-                            <i class="bi bi-trash"></i> Delete
+                            <i class="bi bi-trash"></i>
                         </button>
                     </td>
                 </tr>
@@ -45,6 +46,7 @@
             </tbody>
         </table>
     </div>
+
 
    {{-- Create or Edit Modal --}}
 <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">

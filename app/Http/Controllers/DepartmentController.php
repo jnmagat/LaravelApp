@@ -10,10 +10,11 @@ use Illuminate\Http\JsonResponse;
 
 class DepartmentController extends Controller
 {
-    public function index() {
-       
+      // Load the initial view
+    public function index(Request $request)
+    {
         $departments = \DB::table('departments')->select('id', 'name')->get();
-        return view('manage.department', compact('departments')); 
+        return view('manage.department', compact('departments'));
     }
     
     public function store(Request $request) {
@@ -26,7 +27,11 @@ class DepartmentController extends Controller
                 'name' => $request->department_name
             ]);
 
-            return response()->json(['success' => true, 'department' => $department]);
+            return response()->json([
+                'success' => true, 
+                'message'  => 'Department successfully created!',
+                'department' => $department
+            ]);
 
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
@@ -42,7 +47,10 @@ class DepartmentController extends Controller
             $department = Department::findOrFail($id);
             $department->update(['name' => $request->department_name]);
 
-            return response()->json(['success' => true]);
+            return response()->json([
+                'success' => true,
+                'message'  => 'Department successfully edited!',
+            ]);
 
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
@@ -58,14 +66,21 @@ class DepartmentController extends Controller
     
         if ($employeeCount > 0) {
             // If there are employees, return an error message
-            return response()->json(['error' => 'This department has active employees and cannot be deleted.'], 400); // 400 Bad Request
+            return response()->json([
+                'message' => 'This department has active employees and cannot be deleted.'
+            ], 400);
+        } else {
+            
         }
     
         // Delete the department
         $department->delete();
     
         // Return a success response
-        return response()->json(['success' => true]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Delete Successful'
+        ]);
     }
     
 }

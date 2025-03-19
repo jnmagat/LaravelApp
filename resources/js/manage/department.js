@@ -39,15 +39,17 @@ $(function () {
                                 <td>${response.department.id}</td>
                                 <td class="dept-name">${response.department.name}</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm edit-btn" data-id="${response.department.id}" data-name="${response.department.name}">
-                                        Edit
-                                    </button>
-                                    <button class="btn btn-danger btn-sm delete-btn" data-id="${response.department.id}">Delete</button>
+                                 <button class="btn btn-warning btn-sm edit-btn" data-id="${response.department.id}" data-name="${response.department.name}">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm delete-btn" data-id="${response.department.id}">
+                                    <i class="bi bi-trash"></i>
                                 </td>
                             </tr>`;
                         $("#departmentTableBody").append(newRow);
                     }
                     $("#departmentModal").modal("hide");
+                    showToast(response.message, "success");
                 } else {
                     $("#departmentError").removeClass("d-none").html(response.error);
                 }
@@ -90,17 +92,20 @@ $(function () {
                 url: `/departments/delete/${departmentId}`,
                 type: "DELETE",
                 data: { _token: csrfToken },
-                success(response) {
+                success: function (response) {
                     if (response.success) {
-                        $(`#row-${departmentId}`).remove();
-                    } else {
-                        alert("Failed to delete department.");
-                    }
-                },
-                error() {
-                    alert("Error deleting department.");
+                        $(`#row-${departmentId}`).fadeOut(300, function () {
+                            $(this).remove();
+                            showToast(response.message, "success");
+                        });
+                    }   
+                },                
+                error: function (xhr) {
+                    let errorMessage = xhr.responseJSON?.message || "Something went wrong!";
+                    showToast(errorMessage, "danger");
                 }
             });
         }
     });
 });
+
