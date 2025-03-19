@@ -46,12 +46,6 @@ npm install
 cp .env.example .env
 ```
 
-### Setup your Database
-
-```bash
-CREATE DATABASE laravel_crud;
-```
-
 ### Then, configure your .env file with the correct database credentials:
 
 DB_CONNECTION=mysql
@@ -66,6 +60,23 @@ DB_PASSWORD=your_database_password
 ```bash
 php artisan migrate
 ```
+
+> **Note:**  
+> If you encounter the following error during migration:
+>
+> ```
+> The database 'laravel_crud' does not exist on the 'mysql' connection.
+> ```
+>
+> You can resolve this by typing **`yes`** when prompted:
+>
+> Do you wish to continue with this operation? (yes/no) [yes]:
+>
+> ```bash
+> yes
+> ```
+>
+> This will create the database for you, and the migration will proceed successfully.
 
 ### Serve the application
 
