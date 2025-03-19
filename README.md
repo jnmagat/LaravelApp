@@ -28,23 +28,23 @@ git clone https://github.com/jnmagat/LaravelApp.git
 cd your-project
 ```
 
-## Install PHP dependencies
+### Install PHP dependencies
 
 composer install
 
-## Install frontend dependencies
+### Install frontend dependencies
 
 npm install
 
-## Configure your environment
+### Configure your environment
 
 cp .env.example .env
 
-## Setup your Database
+### Setup your Database
 
 CREATE DATABASE laravel_crud;
 
-## Then, configure your .env file with the correct database credentials:
+### Then, configure your .env file with the correct database credentials:
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -53,15 +53,15 @@ DB_DATABASE=laravel_crud
 DB_USERNAME=your_database_username
 DB_PASSWORD=your_database_password
 
-## Migrate the database
+### Migrate the database
 
 php artisan migrate
 
-## Serve the application
+### Serve the application
 
 php artisan serve
 
-## Then, in a separate terminal, run the Vite development server:
+### Then, in a separate terminal, run the Vite development server:
 
 npm run dev
 
