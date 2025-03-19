@@ -21,7 +21,7 @@ This is a simple web application built with **Laravel** and **Vite** as the fron
 
 Follow these steps to get your application up and running:
 
-### 1. Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/jnmagat/LaravelApp.git
@@ -30,19 +30,27 @@ cd your-project
 
 ### Install PHP dependencies
 
+```bash
 composer install
+```
 
 ### Install frontend dependencies
 
+```bash
 npm install
+```
 
 ### Configure your environment
 
+```bash
 cp .env.example .env
+```
 
 ### Setup your Database
 
+```bash
 CREATE DATABASE laravel_crud;
+```
 
 ### Then, configure your .env file with the correct database credentials:
 
@@ -55,15 +63,21 @@ DB_PASSWORD=your_database_password
 
 ### Migrate the database
 
+```bash
 php artisan migrate
+```
 
 ### Serve the application
 
+```bash
 php artisan serve
+```
 
 ### Then, in a separate terminal, run the Vite development server:
 
+```bash
 npm run dev
+```
 
 The application will be available at http://127.0.0.1:8000
 
